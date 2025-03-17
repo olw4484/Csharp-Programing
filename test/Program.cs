@@ -1,56 +1,31 @@
-﻿namespace test
+﻿using System;
+
+public class Solution
 {
-    internal class Program
+    public int[] solution(int[] num_list)
     {
-        static void Main(string[] args)
+        int[] answer = new int[] { };
+        int evenCount = 0;
+        int oddCount = 0;
+
+        for (int i = 0; i < num_list.Length; i++) // i 변수의 타입 지정 및 초기화, 범위를 지정.
         {
-            for (int i = 0; i < 5; i++)
+            if (i % 2 == 0)
             {
-                for (int j = 0; j <= i; j++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine(" ");
+                evenCount++;
             }
-
-            for (int i = 5; i > 0; i--)
+            else
             {
-                for (int j = 0; j < i; j++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine(" ");
-
-            }
-
-            int height = 5;
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < i; j++)
-                {
-                    Console.Write(" ");
-                }
-                for (int k = i; k < height; k++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine();
-            }
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < height - i - 1; j++)
-                {
-                    Console.Write(" ");
-                }
-                for (int k = 0; k <= i; k++)
-                {
-                    Console.Write("*");
-                }
-                Console.WriteLine();
-
+                oddCount++;
             }
         }
-
+        return answer;
+    }
+    public static void Main(string[] args)
+    {
+        Solution sol = new Solution();
+        int[] num_list = new int[] { 1, 2, 3, 4, 5, 6 };
+        int[] ret = sol.solution(num_list);
+        Console.WriteLine("solution 함수의 반환 값은 " + ret + " 입니다.");
     }
 }
