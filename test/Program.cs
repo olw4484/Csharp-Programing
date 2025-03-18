@@ -1,31 +1,28 @@
 ﻿using System;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Solution
 {
-    public int[] solution(int[] num_list)
+    enum Month
     {
-        int[] answer = new int[] { };
-        int evenCount = 0;
-        int oddCount = 0;
-
-        for (int i = 0; i < num_list.Length; i++) // i 변수의 타입 지정 및 초기화, 범위를 지정.
-        {
-            if (i % 2 == 0)
-            {
-                evenCount++;
-            }
-            else
-            {
-                oddCount++;
-            }
-        }
-        return answer;
+        Jan,  //0
+        Feb,  //1
+        Mar,  //2
+        Apr,  //3
+        May,  //4
+        Jun,  //5
+        Jul,  //6
+        Aug,  //7
+        Sep,  //8
+        Oct,  //9
+        Nov,  //10
+        Dec  //11
     }
-    public static void Main(string[] args)
+    public static void Main(string[] agrs)
     {
-        Solution sol = new Solution();
-        int[] num_list = new int[] { 1, 2, 3, 4, 5, 6 };
-        int[] ret = sol.solution(num_list);
-        Console.WriteLine("solution 함수의 반환 값은 " + ret + " 입니다.");
+        Month currentMonth = Month.Jan;
+        Console.WriteLine($"지금은 :{currentMonth}, {(int)currentMonth + 1}월입니다.");
+        Console.WriteLine($"문자 {currentMonth}의 할당 숫자값은 {(int)currentMonth}입니다.");
+
     }
 }
