@@ -16,8 +16,8 @@
         static void Update(ref Position playerPos,ref Position goalPos, ConsoleKey input, bool[,] map, ref bool gameOver)
         {
             Move(ref playerPos, input, map);
-            bool isClera = CheckGameClear(playerPos, goalPos);
-            if (isClera)
+            bool isClear = CheckGameClear(playerPos, goalPos);
+            if (isClear)
             {
                 gameOver = true;
             }
@@ -77,9 +77,9 @@
                     break;
             }
         }
-        static bool CheckGameClear(Position playerPos, Position galPos)
+        static bool CheckGameClear(Position playerPos, Position goalPos)
         {
-            bool success = (playerPos.x == galPos.x) && (playerPos.y == galPos.y);
+            bool success = (playerPos.x == goalPos.x) && (playerPos.y == goalPos.y);
             return success;
         }
 
@@ -147,7 +147,9 @@
         static void ShowTitle()
         {
             Console.WriteLine("-------------------");
-            Console.WriteLine("미로 찾기 게임", ConsoleColor.Yellow);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("미로 찾기 게임");
+            Console.ResetColor();
             Console.WriteLine("-------------------");
             Console.WriteLine("게임을 시작하려면 아무 키나 누르세요.");
 
