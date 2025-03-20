@@ -4,6 +4,7 @@
     {
         static int count = 0;
         static int stage = 0;
+        static int keyGet = 0;
 
         static void Start(int stage, out Position playerPos, out Position goalPos, out Position keyPos, out char[,] map)
         {
@@ -54,7 +55,7 @@
                         map = new char[12, 15]
                         {
                             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
-                            {'#',' ',' ',' ',' ','#',' ',' ',' ','#',' ',' ',' ',' ','#'},
+                            {'#',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ','#'},
                             {'#','#','#','#',' ','#',' ','#',' ','#',' ','#','#',' ','#'},
                             {'#',' ',' ','#',' ','#',' ','#',' ','#',' ',' ','#',' ','#'},
                             {'#',' ','#','#',' ','#',' ','#',' ','#','#',' ','#',' ','#'},
@@ -107,6 +108,7 @@
                     break;
             }
             ShowTitle();
+            keyGet = 0;
         }
 
         struct Position
@@ -169,7 +171,7 @@
 
         static void PrintKey(Position keyPos)
         {
-            if (count == 0)
+            if (keyGet == 0)
             {
                 Console.SetCursorPosition(keyPos.x, keyPos.y);
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -185,7 +187,7 @@
             bool isClear = CheckGameClear(playerPos, goalPos);
             if (playerPos.x == keyPos.x && playerPos.y == keyPos.y && count == 0)
             {
-                count++;
+                keyGet++;
             }
 
             if (isClear)
@@ -193,12 +195,13 @@
                 gameOver = true;
             }
 
-            if (count > 0 && playerPos.x == goalPos.x && playerPos.y == goalPos.y)
+            if (keyGet > 0 && playerPos.x == goalPos.x && playerPos.y == goalPos.y)
             {
                 Console.Clear();
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine("스테이지 클리어");
                 Console.ReadKey();
+                
             }
         }
 
@@ -274,8 +277,8 @@
                 stage++; // 다음 스테이지로 넘어가기
                 if (stage > 2) // 3스테이지가 끝나면
                 {
-                    End(); // END 함수 호출
-                    return; // 게임 종료
+                    End(); // End 함수 호출
+                    return;
                 }
             }
         }

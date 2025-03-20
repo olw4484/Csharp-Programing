@@ -137,15 +137,15 @@
         }
         #endregion
         #region Render
-        static void Render(Position playerPos, Position goalPos, Position keyPos, char[,] map)
-        {
-            Console.Clear();
-            //Console.SetCursorPosition(0, 0);
-            PrintMap(map); //map은 배경과 같은 것이므로 가장 위에 둬서 먼저 그려지게 만들어야함.
-            PrintGoal(goalPos);
-            PrintKey(keyPos);
-            PrintPlayer(playerPos); //playerPos를 가장 밑에 둬서 P가 가장 위에 그려지게 만듬.
-        }
+static void Render(Position playerPos, Position goalPos, Position keyPos, char[,] map)
+{
+    Console.Clear();
+    //Console.SetCursorPosition(0, 0);
+    PrintMap(map); //map은 배경과 같은 것이므로 가장 위에 둬서 먼저 그려지게 만들어야함.
+    PrintGoal(goalPos);
+    PrintKey(keyPos);
+    PrintPlayer(playerPos); //playerPos를 가장 밑에 둬서 P가 가장 위에 그려지게 만듬.
+}
         static void PrintMap(char[,] map)
         {
             for (int y = 0; y < map.GetLength(0); y++) // y축만큼 반복 할때 
