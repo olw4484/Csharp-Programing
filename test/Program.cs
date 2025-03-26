@@ -1,25 +1,40 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-public class Program
+﻿public interface IOpenable
 {
-    public static void Main()
+    void Open();
+    void Close();
+}
+public class Door : IOpenable
+{
+    public void Open()
     {
-        // 예제: 원래 문자열에 줄바꿈이 포함되어 있는 경우
-        string original = "Line1\nLine2";
-        Console.WriteLine("원본:");
-        Console.WriteLine(original);
+        Console.WriteLine("문이 열렸습니다.");
+    }
+    public void Close()
+    {
+        Console.WriteLine("문이 닫혔습니다.");
+    }
+}
+public class GarageDoor : IOpenable
+{
+    public void Open()
+    {
+        Console.WriteLine("차고 문이 열렸습니다.");
+    }
 
-        // Regex.Escape 적용: 특수문자를 이스케이프 처리
-        string escaped = Regex.Escape(original);
-        Console.WriteLine("\n이스케이프 후:");
-        Console.WriteLine(escaped);
-        // 보통 이 경우, 출력 결과는 "Line1\nLine2"처럼 보일 수 있음.
-
-        // Regex.Unescape 적용: 다시 원래 문자로 복원
-        string unescaped = Regex.Unescape(escaped);
-        Console.WriteLine("\nUnescape 후:");
-        Console.WriteLine(unescaped);
-        // 출력은 원본과 같이 줄바꿈을 적용한 형태가 됩니다.
+    public void Close()
+    {
+        Console.WriteLine("차고 문이 닫혔습니다.");
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        IOpenable door = new Door();
+        door.Open();
+        door.Close();
+        IOpenable gerageDoor = new GarageDoor();
+        gerageDoor.Open();
+        gerageDoor.Close();
     }
 }
