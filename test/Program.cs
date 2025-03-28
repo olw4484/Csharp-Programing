@@ -31,16 +31,26 @@ public class Subscriber
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Worker worker = new Worker(); // 작업자 생성
-        Subscriber subscriber = new Subscriber(); // 구독자 생성
+        Queue<int> queue = new Queue<int>(); //큐 생성
 
-        // 작업 완료 이벤트를 구독 (핸들러 등록)
-        worker.WorkCompleted += subscriber.OnWorkCompletedHandler;
+        queue.Enqueue(10);
+        queue.Enqueue(20);
+        queue.Enqueue(30);
 
-        Console.WriteLine("메인 : 작업 시작 전");
-        worker.DoWork(); // 작업 수행
-        Console.WriteLine("메인 : 작업 완료");
+        Console.WriteLine($"Count : {queue.Count}"); // 3개가 있어서 3
+
+        Console.WriteLine($"Peek : {queue.Peek()}"); // 먼저 들어간 10을 출력 10
+
+        Console.WriteLine($"Dequeue : {queue.Dequeue()}"); // 출력 후 제거, 10을 꺼낸다고
+
+        Console.WriteLine($"Count after Dequeue: {queue.Count}"); // 출력: Count after Dequeue: 2
+
+        Console.WriteLine($"Contains 20? {queue.Contains(20)}"); // 출력: Contains 20? True
+
+        queue.Clear(); //큐 초기화
+        Console.WriteLine($"Count after Clear: {queue.Count}"); // 출력: Count after Clear: 0
     }
 }
+
