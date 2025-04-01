@@ -17,10 +17,14 @@ namespace _16.Day16_ConsoleGame.Scenes
         {
             input = Console.ReadKey(true).Key;
         }
-
         public abstract void Result();
         public abstract void Wait();
         public abstract void Next();
+        
+        protected void Cleared()
+        {
+            Console.Clear();
+        }
 
 
     }

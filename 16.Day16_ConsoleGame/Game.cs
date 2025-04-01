@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using _16.Day16_ConsoleGame.Scenes;
-using static System.Formats.Asn1.AsnWriter;
+﻿using System.Runtime.InteropServices;
 
-namespace TextRPG
+namespace _16.Day16_ConsoleGame.Scenes
 {
     public static class Game
     {
@@ -14,7 +8,24 @@ namespace TextRPG
         private static bool gameOver;
 
         private static Dictionary<string, Scene> sceneDic;
-        private static Scene curScene;
+        private static Scene _cutScene;
+
+        public static Scene GetScene (string sceneName)
+        {
+            if (sceneDic.ContainsKey(sceneName))
+            {
+                return sceneDic[sceneName];
+            }
+            else
+            {
+                throw new KeyNotFoundException($"씬 {sceneName}을 찾을 수 없습니다.");
+            }
+        }
+        public static Scene cutScene
+        {
+            get { return _cutScene; }
+            set { _cutScene = value; }
+        }
 
 
         // 게임에 필요한 기능들
@@ -23,26 +34,28 @@ namespace TextRPG
             // 게임에 있는 모든 씬들을 보관하고 빠르게 찾아줄 용도로 쓸 자료구조
             sceneDic = new Dictionary<string, Scene>();
             sceneDic.Add("Title", new TitleScene());
+            sceneDic.Add("Shop", new Shop());
+            sceneDic.Add("Square", new Square());
 
             // 처음시작할 씬을 선정
-            curScene = sceneDic["Title"];
+            cutScene = sceneDic["Title"];
         }
 
         public static void End()
         {
-
+            gameOver = true;        
         }
 
         public static void Run()
         {
             while (gameOver == false)
             {
-                curScene.Render();
-                curScene.Choice();
-                curScene.Input();
-                curScene.Result();
-                curScene.Wait();
-                curScene.Next();
+                cutScene.Render();
+                cutScene.Choice();
+                cutScene.Input();
+                cutScene.Result();
+                cutScene.Wait();
+                cutScene.Next();
             }
         }
     }

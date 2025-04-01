@@ -1,6 +1,6 @@
-﻿using TextRPG;
+﻿
 
-namespace _16.Day16_ConsoleGame
+namespace _16.Day16_ConsoleGame.Scenes
 {
     internal class Program
     {
