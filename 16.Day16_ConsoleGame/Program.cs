@@ -1,10 +1,23 @@
-﻿namespace _16.Day16_ConsoleGame
+﻿using TextRPG;
+
+namespace _16.Day16_ConsoleGame
 {
     internal class Program
     {
+        //객체지향형 프로그래밍 게임.
+        //기본 큰 틀은 있음.
+        //큰 틀을 주물러서 본인이 만들고 싶은 시스템을 구축하는 것이 목표.
+        //게임을 어떻게 만들지 설정을 짜봐야할듯
+        //직업 시스템, 스탯 시스템, 직업이나 스탯에 따른 선택지 시스템, 시간지연으로 인한 추가 선택지 설정.
+        //운에따른 랜덤성 변화. (랜덤함수 + 운스탯 / 100을 줘서 변화를 만들 수 있나...)
+        //모험을 떠나는 여행자 - lv.1, jop = 일반인, 스탯 구성 - 힘, 민첩, 지능, 운(?) / 시작은 전부 1
+        //선택지에따라 스탯이 상승하고 줄어들 수 있음. / 직업은 일단 4개 - 전사 - 힘, 마법사 - 지능, 궁수 - 민첩, 도적 - 운
+        
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Game.Start();
+            Game.Run();
+            Game.End();
         }
     }
 }
