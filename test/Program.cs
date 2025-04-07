@@ -1,56 +1,32 @@
-﻿public class Worker
+﻿class Program
 {
-    // 작업 완료를 알리는 이벤트 선언
-    public event EventHandler<string> WorkCompleted;
-
-    public void DoWork()
+    static int SumOdd(int start, int end)
     {
-        Console.WriteLine("DoWork : 작업 수행 중...");
+        if (start > end) return 0;  // 범위 초과 시 종료
+        if (start % 2 == 0) return SumOdd(start + 1, end);  // 짝수일 경우 한 칸 이동
 
-
-        Thread.Sleep(1000); // 1초대기
-
-        // 작업 완료 후 이벤트 발생
-        OnWorkCompleted("작업이 완료되었습니다.");
+        if (start == end) return start; // 기본 경우
+        int mid = (start + end) / 2;
+        return SumOdd(start, mid) + SumOdd(mid + 1, end);
     }
 
-    // 이벤트 트리거 메서드
-    protected virtual void OnWorkCompleted(string message)
+    static int SumEven(int start, int end)
     {
-        WorkCompleted?.Invoke(this, message); // 이벤트를 발생시켜 구독된 핸들러를 호출
-    }
-}
+        if (start > end) return 0;  // 범위 초과 시 종료
+        if (start % 2 != 0) return SumEven(start + 1, end);  // 홀수일 경우 한 칸 이동
 
-public class Subscriber
-{
-    public void OnWorkCompletedHandler(object sender, string message)
-    {
-        Console.WriteLine("Subscriber : {0}", message);
+        if (start == end) return start; // 기본 경우
+        int mid = (start + end) / 2;
+        return SumEven(start, mid) + SumEven(mid + 1, end);
     }
-}
 
-class Program
-{
     static void Main()
     {
-        Queue<int> queue = new Queue<int>(); //큐 생성
+        int oddSum = SumOdd(1, 99);   // 홀수 합
+        int evenSum = SumEven(2, 100); // 짝수 합
 
-        queue.Enqueue(10);
-        queue.Enqueue(20);
-        queue.Enqueue(30);
-
-        Console.WriteLine($"Count : {queue.Count}"); // 3개가 있어서 3
-
-        Console.WriteLine($"Peek : {queue.Peek()}"); // 먼저 들어간 10을 출력 10
-
-        Console.WriteLine($"Dequeue : {queue.Dequeue()}"); // 출력 후 제거, 10을 꺼낸다고
-
-        Console.WriteLine($"Count after Dequeue: {queue.Count}"); // 출력: Count after Dequeue: 2
-
-        Console.WriteLine($"Contains 20? {queue.Contains(20)}"); // 출력: Contains 20? True
-
-        queue.Clear(); //큐 초기화
-        Console.WriteLine($"Count after Clear: {queue.Count}"); // 출력: Count after Clear: 0
+        Console.WriteLine($"홀수 합: {oddSum}");
+        Console.WriteLine($"짝수 합: {evenSum}");
+        Console.WriteLine($"전체 합: {oddSum + evenSum}");
     }
 }
-
